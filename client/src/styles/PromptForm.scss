@@ -1,0 +1,115 @@
+body.has-fullscreen .input-form {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translate(-50%, 40px);
+}
+
+.input-form {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px; /* Pill shape */
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+  z-index: 10000; /* Extremely high for HUD layer */
+  transform: translateX(-50%) translateZ(200px); /* Position it in front in 3D space */
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.centered {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+    animation: popInCentered 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes slideUpPalette {
+  from { opacity: 0; transform: translate(-50%, 40px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes popInCentered {
+  from { opacity: 0; transform: translate(-50%, 80%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, 50%) scale(1); }
+}
+
+.text-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  font-size: 1.05rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.submit-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+  }
+
+  &:not(:disabled):active {
+    transform: scale(0.95);
+  }
+}
+
+/* Loading state for the thought generation */
+.loading-indicator {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--text-primary);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+
+  &:nth-child(1) { animation-delay: -0.32s; }
+  &:nth-child(2) { animation-delay: -0.16s; }
+}

@@ -1,0 +1,106 @@
+/* Spatial Result Area (Canvas Layer) */
+.result-area {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Let clicks pass through to canvas if needed later */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Base style for a generated thought node in the spatial canvas */
+.spatial-node {
+  pointer-events: auto;
+  position: absolute;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 2rem;
+  min-width: 300px;
+  max-width: 500px;
+  box-shadow: 0 40px 80px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 var(--glass-highlight);
+  animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  
+  /* True 3D depth */
+  transform-style: preserve-3d;
+  transform: translateZ(50px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    transform: translateZ(80px) scale(1.02);
+  }
+
+  /* 3D Glass Edge Thickness */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 17px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 40%, rgba(255,255,255,0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transform: translateZ(-1px);
+  }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); filter: blur(4px); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+}
+
+.empty-state {
+  display: none; /* We don't need a traditional empty state on an infinite canvas */
+}
+
+.result-content {
+  width: 100%;
+
+  h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.type-badge {
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.json-render {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}

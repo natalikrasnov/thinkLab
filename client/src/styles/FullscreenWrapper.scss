@@ -1,0 +1,115 @@
+.fullscreen-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+
+  &.is-fullscreen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: #0f172a;
+    padding: 4rem;
+    border-radius: 0;
+  }
+  
+  &:not(.is-fullscreen) {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 12px;
+  }
+}
+
+.fullscreen-title {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: #f8fafc;
+  font-size: 24px;
+  z-index: 10;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.fullscreen-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &.is-fullscreen {
+    max-width: 1200px;
+    max-height: calc(100vh - 8rem);
+  }
+
+  &:not(.is-fullscreen) {
+    max-width: none;
+    max-height: none;
+  }
+}
+
+.canvas-controls {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.canvas-control-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  &:hover {
+    background: var(--accent-blue);
+    color: white;
+    border-color: var(--accent-blue);
+  }
+}
+
+.node-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+  padding: 0;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.4);
+  }
+}
