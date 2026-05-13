@@ -202,7 +202,7 @@ export function MindMapRenderer({ data, onDelete }: MindMapRendererProps) {
 
     // 3. Make API request for branches
     try {
-      const response = await fetch('http://localhost:3002/api/analyze', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ input: fullInput }),
@@ -262,7 +262,7 @@ export function MindMapRenderer({ data, onDelete }: MindMapRendererProps) {
     setIsDiscussing(true);
     setDiscussionResult(null);
     try {
-      const response = await fetch('http://localhost:3002/api/discuss', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/discuss`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mapData: tree }),

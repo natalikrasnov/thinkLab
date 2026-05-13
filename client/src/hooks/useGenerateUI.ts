@@ -13,7 +13,7 @@ export const useGenerateUI = () => {
     setIsSimulating(true);
 
     try {
-      const response = await fetch('http://localhost:3002/api/analyze', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

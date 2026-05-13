@@ -80,7 +80,7 @@ export function CompositionRenderer({ data, onDelete }: CompositionRendererProps
     setIsBotTyping(true);
 
     try {
-      const res = await fetch('http://127.0.0.1:3002/api/scene/chat', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/scene/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -106,7 +106,7 @@ export function CompositionRenderer({ data, onDelete }: CompositionRendererProps
 
   const generateScene = async (imagePrompt: string) => {
     try {
-      const res = await fetch('http://127.0.0.1:3002/api/scene/generate-background', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/scene/generate-background`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imagePrompt, context: data.title })
@@ -136,7 +136,7 @@ export function CompositionRenderer({ data, onDelete }: CompositionRendererProps
         setPhase('generating');
         
         try {
-          const res = await fetch('http://127.0.0.1:3002/api/scene/generate-tools', {
+          const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/scene/generate-tools`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ context: data.title })

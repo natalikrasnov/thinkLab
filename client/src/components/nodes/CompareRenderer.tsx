@@ -41,7 +41,7 @@ export function CompareRenderer({ data, onDelete }: CompareRendererProps) {
     setIsFetchingDimensions(true);
     try {
       const input = `We are comparing: ${options.join(', ')}. Existing dimensions are: ${localDimensions.join(', ')}. Generate exactly 2 NEW additional dimensions (aspects or questions) to evaluate these options. Focus on aspects not yet covered. Return a Compare JSON containing the new dimensions only.`;
-      const response = await fetch('http://localhost:3002/api/analyze', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ input }),
@@ -64,7 +64,7 @@ export function CompareRenderer({ data, onDelete }: CompareRendererProps) {
     setDiscussionResult(null);
     try {
       const payload = { type: 'compare', options, dimensions: localDimensions, reflections: cellData };
-      const response = await fetch('http://localhost:3002/api/discuss', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3002'}/api/discuss`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mapData: payload }),
